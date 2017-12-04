@@ -171,12 +171,12 @@ index f3c68fab3de6..b8609daf3ef9 100644
    }
  
 diff --git a/third_party/WebKit/Source/core/loader/BUILD.gn b/third_party/WebKit/Source/core/loader/BUILD.gn
-index 1e08519e1410..eceb046eb309 100644
+index 4da843f7f712..f07f24a07ef2 100644
 --- a/third_party/WebKit/Source/core/loader/BUILD.gn
 +++ b/third_party/WebKit/Source/core/loader/BUILD.gn
-@@ -133,4 +133,11 @@ blink_core_sources("loader") {
+@@ -136,4 +136,11 @@ blink_core_sources("loader") {
    public_deps = [
-     "//services/network/public/interfaces:interfaces_blink",
+     "//third_party/WebKit/Source/platform",
    ]
 +
 +  if (is_electron_build) {
