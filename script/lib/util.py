@@ -69,7 +69,7 @@ def get_vs_env(vs_version, arch):
   """
 
   vsvarspath = os.path.join(os.environ["ProgramFiles(x86)"], "Microsoft Visual Studio {0}", "VC", "vcvarsall.bat")
-	vsvarsall = vsvarspath.format(vs_version)
+  vsvarsall = vsvarspath.format(vs_version)
 
   if (vs_version == "2017"):
     vs2017path = os.path.join(os.environ["ProgramFiles(x86)"], "Microsoft Visual Studio", vs_version)
