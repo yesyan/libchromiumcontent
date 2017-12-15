@@ -5,7 +5,7 @@ from __future__ import print_function
 import itertools
 import subprocess
 import sys
-
+import os
 
 def validate_pair(ob):
   if not (len(ob) == 2):
@@ -67,9 +67,18 @@ def get_vs_env(vs_version, arch):
   be one of "x86", "amd64", "arm", "x86_amd64", "x86_arm", "amd64_x86",
   "amd64_arm", e.g. the args passed to vcvarsall.bat.
   """
-  vsvarsall = ""
+
+  vsvarspath = os.path.join(os.environ["ProgramFiles(x86)"], "Microsoft Visual Studio {0}", "VC", "vcvarsall.bat")
+	vsvarsall = vsvarspath.format(vs_version)
+
   if (vs_version == "2017"):
-   vsvarsall = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build"
-  else:
-	vsvarsall = "C:\\Program Files (x86)\\Microsoft Visual Studio {0}\\VC\\vcvarsall.bat".format(vs_version)
+    vs2017path = os.path.join(os.environ["ProgramFiles(x86)"], "Microsoft Visual Studio", vs_version)
+    vs2017versions = [ "Community", "Enterprise" ]
+
+    for vs2017version in vs2017versions:
+      vsvarspath = os.path.join(vs2017path, vs2017version, "VC", "Auxiliary", "Build", "vcvarsall.bat")
+      if (os.path.exists(vsvarspath)):
+        vsvarsall = vsvarspath
+        break
+    
   return get_environment_from_batch_command([vsvarsall, arch])
